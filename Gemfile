@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 # Gem helpers
 gem 'colorize', '~> 0.8.1'
+gem 'json', '~> 2.3', '>= 2.3.1'
 gem 'terminal-table', '~> 1.8'
 gem 'tty-prompt', '~> 0.22.0'
 gem 'tty-reader', '~> 0.8.0'
