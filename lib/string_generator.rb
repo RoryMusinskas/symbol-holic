@@ -1,5 +1,8 @@
 module StringGenerator
+  # An array of all the symbols to be availble to the user
   SYMBOLS = ['#', '`', '%', '&', '[', '{', '}', '(', '=', '*', ')', '+', ']', '!', '|', '-', '_', '@', '^', '/', '?', '<', '>', '$', '~', ';', ':'].freeze
+
+  # create a randomized array of symbols to guess
   def self.create_symbol_array
     randomized_array = []
 
@@ -11,6 +14,7 @@ module StringGenerator
     randomized_array.uniq
   end
 
+  # This is called when there is no data stored in the JSON file. It outputs a hash with all the symbols and sets all values to 0
   def self.add_symbols_to_hash
     @combined_scores = {}
     SYMBOLS.each do |item|
