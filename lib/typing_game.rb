@@ -41,11 +41,11 @@ class TypingGame
       puts current_input
 
       # Get the accuracy of each symbol
-      @accuracy = (1 / (1 + @wrong_keys.to_f) * 100)
+      #      @accuracy = (1 / (1 + @wrong_keys.to_f) * 100)
       # Call and return the word per minute of each symbol
       words_per_min(first_time, second_time)
       # add the words per min, accuracy and 1 (for the amount of times the symbol has been shown)
-      @keypress_statistics[item] = [@words_per_min, @accuracy, 1]
+      @keypress_statistics[item] = [1, @wrong_keys, @words_per_min]
     end
     @keypress_statistics
   end
