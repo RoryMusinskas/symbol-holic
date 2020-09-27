@@ -18,7 +18,7 @@ module StringGenerator
   def self.add_symbols_to_hash
     @combined_scores = {}
     SYMBOLS.each do |item|
-      @combined_scores[item] = [0, 0, 0, 0]
+      @combined_scores[item] = [0, 0, 0, 0, 0]
     end
     @combined_scores
   end
