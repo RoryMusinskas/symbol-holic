@@ -22,7 +22,15 @@ class Menu
 
   # Added in for the command line arguments. We can call display_statistics on menu and not create a new TypingStatistics instance
   def display_statistics
+    # If the user hasn't played a game yet, there is no need to display their typing scores
+    # It throws a JSON::ParsorError as the file is empty and cannot be parsed
     @typing_statistics.display_statistics
+    # If it is not empty, display their statistics
+    # If it is empty, display a prompt and let them choose another menu item
+  rescue JSON::ParserError
+    puts
+    puts "You haven't played a game yet. Please play one game and then try again.".colorize(:red)
+    puts
   end
 
   # Method for running the game
@@ -40,17 +48,7 @@ class Menu
         run_game
       # Display the users statistics if they select 'Display your typing statistics'
       elsif choice == 2
-        # If the user hasn't played a game yet, there is no need to display their typing scores
-        # It throws a JSON::ParsorError as the file is empty and cannot be parsed
-        begin
-          display_statistics
-          # If it is not empty, display their statistics
-          # If it is empty, display a prompt and let them choose another menu item
-        rescue JSON::ParserError
-          puts
-          puts "You haven't played a game yet. Please play one game and then try again.".colorize(:red)
-          puts
-        end
+        display_statistics
         # Exit the program if the user selects 'Exit'
       elsif choice == 3
         exit
