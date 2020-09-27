@@ -1,5 +1,6 @@
 require 'json'
 require 'terminal-table'
+require 'colorize'
 require_relative 'typing_game'
 require_relative 'string_generator'
 require 'byebug'
@@ -25,9 +26,11 @@ class TypingStatistics
       # Storing the total amount of errors the user has made
       @averaged_statistics[key][1] = @averaged_statistics[key][1] + val[1]
       # Storing the average accuracy for the user
-      @averaged_statistics[key][2] = @averaged_statistics[key][0] / (@averaged_statistics[key][0] + @averaged_statistics[key][1]).to_f
+      @averaged_statistics[key][2] = ((@averaged_statistics[key][0] / (@averaged_statistics[key][0] + @averaged_statistics[key][1]).to_f) * 100).round(1)
+      # Storing the total wpm
+      @averaged_statistics[key][3] = @averaged_statistics[key][3] + val[2]
       # Storing the average WPM to the averaged hash
-      @averaged_statistics[key][3] = ((@averaged_statistics[key][3] + val[2]) / (@averaged_statistics[key][0]))
+      @averaged_statistics[key][4] = (@averaged_statistics[key][3] / (@averaged_statistics[key][0])).round(1)
     end
     # Write the statistics at the end of each game into the JSON file
     write_statistics(@averaged_statistics)
@@ -58,12 +61,16 @@ class TypingStatistics
     read_statistics
     # Make a terminal table and add in values from averaged_statistics hash
     @rows = []
+    counter = 0
     @averaged_statistics.each do |key, val|
-      @rows << [key, val[3], val[2], val[0], val[1]]
-      # @rows << [key, val[0], val[1], val[2], val[3]]
-      @rows << :separator
+      val[2] = val[2].to_s.colorize(:red) if val[2].positive? && val[2] < 60
+
+      @rows << [key, val[4], val[2], val[0]]
+      # Don't print a separator on the last symbol, which is :
+      counter += 1
+      @rows << :separator if counter < @averaged_statistics.size
     end
-    table = Terminal::Table.new headings: ['Symbol', 'Average WPM', 'Average Accuracy', 'Symbol Count', 'Errors'], rows: @rows
+    table = Terminal::Table.new title: 'Your Typing Statistics', headings: ['Symbol', 'Average WPM', 'Average Accuracy %', 'Symbol Count'], rows: @rows
     puts table
   end
 end
