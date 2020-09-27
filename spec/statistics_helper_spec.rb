@@ -33,4 +33,4 @@ describe 'Add empty hash to JSON file' do
     expect(StatisticsHelper.add_symbols_to_hash['#']).to eq([0, 0, 0, 0, 0])
     expect(StatisticsHelper.add_symbols_to_hash[':']).to eq([0, 0, 0, 0, 0])
   end
-en
+end
