@@ -1,15 +1,15 @@
 require 'colorize'
 require 'json'
 require 'io/console'
-require_relative 'string_generator'
+require_relative 'statistics_helper'
 
 class TypingGame
-  # Bring in the StringGenerator module
-  include StringGenerator
+  # Bring in the StatisticsHelper module
+  include StatisticsHelper
 
   # Initialize the typing game
   def initialize
-    @symbol_array = StringGenerator.create_symbol_array
+    @symbol_array = StatisticsHelper.create_symbol_array
     @keypress_statistics = {}
   end
 

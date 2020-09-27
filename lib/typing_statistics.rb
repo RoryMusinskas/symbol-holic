@@ -2,11 +2,11 @@ require 'json'
 require 'terminal-table'
 require 'colorize'
 require_relative 'typing_game'
-require_relative 'string_generator'
+require_relative 'statistics_helper'
 require 'byebug'
 class TypingStatistics
   # Bring in the string generator module
-  include StringGenerator
+  include StatisticsHelper
 
   # The method for taking in the score of the game that the user just played
   # It then inputs the score into the average statistics for the user
@@ -16,7 +16,7 @@ class TypingStatistics
       read_statistics
     rescue StandardError
       # Create an instanced empty hash so the score can be appended to it, as it will be nil otherwise and throw an error
-      @averaged_statistics = StringGenerator.add_symbols_to_hash if @averaged_statistics.nil?
+      @averaged_statistics = StatisticsHelper.add_symbols_to_hash if @averaged_statistics.nil?
     end
 
     # Take the scores hash of the last completed typing game and append them to the averaged_statistics hash
