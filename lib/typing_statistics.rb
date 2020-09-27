@@ -15,7 +15,7 @@ class TypingStatistics
     begin
       read_statistics
     rescue StandardError
-      # Create an empty hash so the score can be appended to it, as it will be nil otherwise and throw an error
+      # Create an instanced empty hash so the score can be appended to it, as it will be nil otherwise and throw an error
       @averaged_statistics = StringGenerator.add_symbols_to_hash if @averaged_statistics.nil?
     end
 
@@ -63,14 +63,20 @@ class TypingStatistics
     @rows = []
     counter = 0
     @averaged_statistics.each do |key, val|
+      # Set the color of the symbol to red if the users accuracy is less than 60
       val[2] = val[2].to_s.colorize(:red) if val[2].positive? && val[2] < 60
-
+      # Add each symbol and associated data to the terminal-table row
       @rows << [key, val[4], val[2], val[0]]
-      # Don't print a separator on the last symbol, which is :
       counter += 1
+      # Print a seperator for each symbol apart from the last
       @rows << :separator if counter < @averaged_statistics.size
     end
     table = Terminal::Table.new title: 'Your Typing Statistics', headings: ['Symbol', 'Average WPM', 'Average Accuracy %', 'Symbol Count'], rows: @rows
     puts table
+  end
+
+  # The method for wiping the JSON file if the user wants to.
+  def wipe_file
+    File.truncate(file_path, 0)
   end
 end
