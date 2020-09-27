@@ -40,8 +40,6 @@ class TypingGame
       second_time = Time.now.to_f if current_input == item
       puts current_input
 
-      # Get the accuracy of each symbol
-      #      @accuracy = (1 / (1 + @wrong_keys.to_f) * 100)
       # Call and return the word per minute of each symbol
       words_per_min(first_time, second_time)
       # add the words per min, accuracy and 1 (for the amount of times the symbol has been shown)
