@@ -6,7 +6,7 @@ require_relative 'statistics_helper'
 require 'byebug'
 class TypingStatistics
   # Bring in the string generator module
-  include StatisticsHelper
+  # include StatisticsHelper
 
   # The method for taking in the score of the game that the user just played
   # It then inputs the score into the average statistics for the user
@@ -22,18 +22,42 @@ class TypingStatistics
     # Take the scores hash of the last completed typing game and append them to the averaged_statistics hash
     scores.each do |key, val|
       # Storing the amount of times each symbol has been displayed to the averaged hash
-      @averaged_statistics[key][0] = @averaged_statistics[key][0] + val[0]
+      @averaged_statistics[key][0] = total_count(@averaged_statistics[key][0], val[0])
       # Storing the total amount of errors the user has made
-      @averaged_statistics[key][1] = @averaged_statistics[key][1] + val[1]
+      @averaged_statistics[key][1] = total_count(@averaged_statistics[key][1], val[1])
       # Storing the average accuracy for the user
-      @averaged_statistics[key][2] = ((@averaged_statistics[key][0] / (@averaged_statistics[key][0] + @averaged_statistics[key][1]).to_f) * 100).round(1)
+      @averaged_statistics[key][2] = average_accuracy(@averaged_statistics[key][0], @averaged_statistics[key][1])
       # Storing the total wpm
-      @averaged_statistics[key][3] = @averaged_statistics[key][3] + val[2]
+      @averaged_statistics[key][3] = total_count(@averaged_statistics[key][3], val[2])
       # Storing the average WPM to the averaged hash
-      @averaged_statistics[key][4] = (@averaged_statistics[key][3] / (@averaged_statistics[key][0])).round(1)
+      @averaged_statistics[key][4] = average_wpm(@averaged_statistics[key][3], @averaged_statistics[key][0])
     end
     # Write the statistics at the end of each game into the JSON file
-    write_statistics(@averaged_statistics)
+    write_statistics(sort_averaged_statistics)
+  end
+
+  # Sort the users average scores by adding the average speed and accuracy, this is the indication of a good key
+  def sort_averaged_statistics
+    # This converts the hash into a sorted array
+    sorted_array = @averaged_statistics.sort_by { |_key, val| -(val[2] + val[4]) }
+    # Convert the array back to a hash for processing
+    @averaged_statistics = sorted_array.to_h
+  end
+
+  # Total counter method to assist with setting the key values
+  def total_count(total, addition)
+    total += addition
+    total
+  end
+
+  # Average accuracy method to assist with setting the key values
+  def average_accuracy(total_symbol_count, total_error_count)
+    ((total_symbol_count / (total_symbol_count + total_error_count).to_f) * 100).round(1)
+  end
+
+  # Average Words Per Minute method to assist with setting the key values
+  def average_wpm(total_wpm, total_symbol_count)
+    (total_wpm / total_symbol_count).round(1)
   end
 
   # Used for getting the absolute file path, wherever the user is. For when the user runs program from anywhere.
