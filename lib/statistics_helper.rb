@@ -21,7 +21,11 @@ module StatisticsHelper
   def self.create_targeted_array
     worst_key_array = []
     # Read the users statistics from the file
-    typing_statistics = TypingStatistics.new.read_statistics
+    begin
+      typing_statistics = TypingStatistics.new.read_statistics
+    rescue JSON::ParserError
+      typing_statistics = add_symbols_to_hash
+    end
     # Get the last 8 hash elements (The users worst keys), by revesing hash and getting the first 8 elements
     worst_keys = typing_statistics.reverse_each.to_h.first(8)
     worst_keys.each do |key|
