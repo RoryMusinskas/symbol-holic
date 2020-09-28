@@ -1,6 +1,7 @@
 require 'json'
 require 'terminal-table'
 require 'colorize'
+require 'colorized_string'
 require_relative 'typing_game'
 require_relative 'statistics_helper'
 require 'byebug'
@@ -84,8 +85,11 @@ class TypingStatistics
     @rows = []
     counter = 0
     @averaged_statistics.each do |key, val|
-      # Set the color of the symbol to red if the users accuracy is less than 60
+      p String.modes
+      # Set the color of the accuracy to red if the users accuracy is less than 60
       val[2] = val[2].to_s.colorize(:red) if val[2].positive? && val[2] < 60
+      # Set the color of the WPM if the user WPM is under 50
+      val[4] = val[4].to_s.colorize(:yellow) if val[4] < 40 && val[4] != 0
       # Add each symbol and associated data to the terminal-table row
       @rows << [key, val[4], val[2], val[0]]
       counter += 1
