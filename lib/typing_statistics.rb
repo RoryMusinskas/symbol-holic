@@ -5,16 +5,13 @@ require_relative 'typing_game'
 require_relative 'statistics_helper'
 require 'byebug'
 class TypingStatistics
-  # Bring in the string generator module
-  # include StatisticsHelper
-
   # The method for taking in the score of the game that the user just played
   # It then inputs the score into the average statistics for the user
   def statistics(scores)
     # If there is already a hash in the JSON File, then read it or else create a new blank hash (Will only be first time user runs game)
     begin
       read_statistics
-    rescue StandardError
+    rescue JSON::ParserError
       # Create an instanced empty hash so the score can be appended to it, as it will be nil otherwise and throw an error
       @averaged_statistics = StatisticsHelper.add_symbols_to_hash if @averaged_statistics.nil?
     end
