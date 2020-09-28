@@ -12,10 +12,11 @@ class Menu
   def menu_selection
     # Choices for the user to select at the menu
     menu_choices = [
-      { name: 'Start Typing', value: '1' },
-      { name: 'Display your typing statistics', value: '2' },
-      { name: 'Reset your typing statistics', value: '3' },
-      { name: 'Exit', value: '4' }
+      { name: 'Start typing', value: '1' },
+      { name: 'Start targeted typing practice', value: '2' },
+      { name: 'Display your typing statistics', value: '3' },
+      { name: 'Reset your typing statistics', value: '4' },
+      { name: 'Exit', value: '5' }
     ]
     # TTY prompt with the menu choices, users can select one of these items
     TTY::Prompt.new.select('Welcome to Symbol-holic!', menu_choices)
@@ -28,14 +29,17 @@ class Menu
       # Start typing game if user selects 'Start Typing'
       if choice == 1
         run_game
-      # Display the users statistics if they select 'Display your typing statistics'
+      # Start the targeted typing game if user selects 'Start targeted typing practice'
       elsif choice == 2
+        targeted_game
+      # Display the users statistics if they select 'Display your typing statistics'
+      elsif choice == 3
         display_statistics
       # Reset users statistics if they want to
-      elsif choice == 3
+      elsif choice == 4
         reset_statistics
         # Exit the program if the user selects 'Exit'
-      elsif choice == 4
+      elsif choice == 5
         exit
       end
     end
@@ -58,6 +62,13 @@ class Menu
   def run_game
     @typing_game = TypingGame.new
     @scores = @typing_game.run_game
+    @typing_statistics.statistics(@scores)
+  end
+
+  # Method for running the targeted typing game
+  def targeted_game
+    @typing_game = TypingGame.new
+    @scores = @typing_game.targeted_game
     @typing_statistics.statistics(@scores)
   end
 
