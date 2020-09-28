@@ -37,6 +37,7 @@ class TypingGame
   # The logic for running the game
   def game_logic(item)
     @wrong_keys = 0
+
     print "#{item}  --->   "
 
     # Get the time at the start of each loop
@@ -46,6 +47,7 @@ class TypingGame
 
     # Until the user gets the right key, keep prompting them, add keep a total for the amount of wrong keys hit before the correct one
     while current_input != item
+      print "#{current_input.colorize(:red)}, "
       current_input = STDIN.getch
       @wrong_keys += 1
     end
