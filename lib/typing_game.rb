@@ -19,6 +19,7 @@ class TypingGame
     @words_per_min = 60 / (second_time - first_time)
   end
 
+  # Run the stardard typing game
   def run_game
     # Print each item from the generated symbol array
     @symbol_array.each do |item|
@@ -27,6 +28,7 @@ class TypingGame
     @keypress_statistics
   end
 
+  # Run the targeted typing game
   def targeted_game
     @targeted_array.each do |item|
       game_logic(item)
@@ -34,10 +36,25 @@ class TypingGame
     @keypress_statistics
   end
 
+  # Calculate the statistics to put into the hash, need to add the values each loop now that you can do multiple keys each run
+  def calculate_statistics(item, wrong_keys)
+    # If there is no value for the key in the hash, then add the current values in
+    if @keypress_statistics[item].nil?
+      # add the words per min, accuracy and 1 (for the amount of times the symbol has been shown)
+      @keypress_statistics[item] = [1, wrong_keys, @words_per_min]
+    else
+      # Get the values in the hash and add the values to make a total to pass to the statistics
+      symbol_count = @keypress_statistics[item][0] + 1
+      wrong_keys_count = @keypress_statistics[item][1] + wrong_keys
+      wpm_total = @keypress_statistics[item][2] + @words_per_min
+
+      @keypress_statistics[item] = [symbol_count, wrong_keys_count, wpm_total]
+    end
+  end
+
   # The logic for running the game
   def game_logic(item)
-    @wrong_keys = 0
-
+    wrong_keys = 0
     print "#{item}  --->   "
 
     # Get the time at the start of each loop
@@ -49,7 +66,7 @@ class TypingGame
     while current_input != item
       print "#{current_input.colorize(:red)}, "
       current_input = STDIN.getch
-      @wrong_keys += 1
+      wrong_keys += 1
     end
 
     # Get the time when the user types the correct key
@@ -58,7 +75,6 @@ class TypingGame
 
     # Call and return the word per minute of each symbol
     words_per_min(first_time, second_time)
-    # add the words per min, accuracy and 1 (for the amount of times the symbol has been shown)
-    @keypress_statistics[item] = [1, @wrong_keys, @words_per_min]
+    calculate_statistics(item, wrong_keys)
   end
 end
