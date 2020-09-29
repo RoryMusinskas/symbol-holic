@@ -20,7 +20,7 @@ module StatisticsHelper
   # This is a method to get the last 8 keys from the user to make into a new array for targeted practice
   def self.create_targeted_array
     worst_key_array = []
-    # Read the users statistics from the file
+    # Read the users statistics from the file, if there is no data in the file, create an object with 0 as values
     begin
       typing_statistics = TypingStatistics.new.read_statistics
     rescue JSON::ParserError
