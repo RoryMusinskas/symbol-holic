@@ -85,7 +85,6 @@ class TypingStatistics
     @rows = []
     counter = 0
     @averaged_statistics.each do |key, val|
-      p String.modes
       # Set the color of the accuracy to red if the users accuracy is less than 60
       val[2] = val[2].to_s.colorize(:red) if val[2].positive? && val[2] < 60
       # Set the color of the WPM if the user WPM is under 50
