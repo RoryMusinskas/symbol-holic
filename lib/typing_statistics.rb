@@ -102,5 +102,6 @@ class TypingStatistics
   # The method for wiping the JSON file if the user wants to.
   def wipe_file
     File.truncate(file_path, 0)
+    @averaged_statistics = StatisticsHelper.add_symbols_to_hash
   end
 end
