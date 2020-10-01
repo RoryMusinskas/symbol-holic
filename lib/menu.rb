@@ -1,6 +1,7 @@
 require 'tty-prompt'
 require 'json'
 require 'colorize'
+require 'tty-pie'
 require_relative 'typing_game'
 require_relative 'typing_statistics'
 
@@ -48,7 +49,7 @@ class Menu
   # Added in for the command line arguments. We can call display_statistics on menu and not create a new TypingStatistics instance
   def display_statistics
     # If the user hasn't played a game yet, there is no need to display their typing scores
-    # It throws a JSON::ParsorError as the file is empty and cannot be parsed
+    # It throws a JSON::ParserError as the file is empty and cannot be parsed
     @typing_statistics.display_statistics
     # If it is not empty, display their statistics
     # If it is empty, display a prompt and let them choose another menu item
@@ -62,6 +63,7 @@ class Menu
   def run_game
     @typing_game = TypingGame.new
     @scores = @typing_game.run_game
+    # @scores eg {";"=>[1, 1, 51.413921326711545], ":"=>[1, 0, 79.55781654849564], "#"=>[2, 0, 164.6563074129133]}
     @typing_statistics.statistics(@scores)
   end
 
