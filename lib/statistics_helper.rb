@@ -1,4 +1,3 @@
-require 'byebug'
 require_relative 'typing_statistics'
 
 module StatisticsHelper
@@ -8,7 +7,6 @@ module StatisticsHelper
   # create a randomized array of symbols to guess
   def self.create_symbol_array
     randomized_array = []
-
     # choose a random symbol out of the array and append to a new array.
     15.times do
       randomized_array << SYMBOLS.sample
