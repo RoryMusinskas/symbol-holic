@@ -3,6 +3,7 @@ GEM
   specs:
     colorize (0.8.1)
     diff-lcs (1.4.4)
+    json (2.3.1)
     pastel (0.8.0)
       tty-color (~> 0.5)
     rake (13.0.1)
@@ -25,6 +26,9 @@ GEM
       unicode-display_width (~> 1.1, >= 1.1.1)
     tty-color (0.5.2)
     tty-cursor (0.7.1)
+    tty-pie (0.4.0)
+      pastel (~> 0.8)
+      tty-cursor (~> 0.7)
     tty-prompt (0.22.0)
       pastel (~> 0.8)
       tty-reader (~> 0.8)
@@ -41,9 +45,11 @@ PLATFORMS
 
 DEPENDENCIES
   colorize (~> 0.8.1)
+  json (~> 2.3, >= 2.3.1)
   rspec (~> 3.9)
   ruby-debug-ide (~> 0.7.2)
   terminal-table (~> 1.8)
+  tty-pie
   tty-prompt (~> 0.22.0)
   tty-reader (~> 0.8.0)
 
