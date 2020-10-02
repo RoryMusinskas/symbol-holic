@@ -2,7 +2,7 @@ require 'json'
 require 'terminal-table'
 require 'tty-pie'
 require 'colorize'
-require 'colorized_string'
+require 'byebug'
 require_relative 'typing_game'
 require_relative 'statistics_helper'
 class TypingStatistics
@@ -32,7 +32,7 @@ class TypingStatistics
       @averaged_statistics[key][4] = average_wpm(@averaged_statistics[key][3], @averaged_statistics[key][0])
     end
     # Write the statistics at the end of each game into the JSON file
-    write_statistics(sort_averaged_statistics(@averaged_statistics))
+    sort_averaged_statistics(@averaged_statistics)
   end
 
   # Total counter method to assist with setting the key values
@@ -74,8 +74,8 @@ class TypingStatistics
   end
 
   # Write the averaged_statistics hash to the JSON file
-  def write_statistics(averaged_statistics)
-    File.write(file_path, JSON.pretty_generate(averaged_statistics))
+  def write_statistics
+    File.write(file_path, JSON.pretty_generate(@averaged_statistics))
   end
 
   # Make a pie chart for the hit and miss count
