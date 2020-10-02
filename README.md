@@ -112,4 +112,5 @@ JSON::ParserError handling:
 ![Symbol-holic flowchart](docs/Terminal%20App.png)
 
 ### Develop an implementation plan on trello
+[Trello board finshed](https://trello.com/b/y9t6KNGz/symbol-holic-terminal-app)
 ![Trello board mid project](docs/Trello.png)

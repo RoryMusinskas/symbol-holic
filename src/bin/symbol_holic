@@ -1,0 +1,40 @@
+#!/usr/bin/ruby
+require 'optparse'
+require_relative '../lib/menu'
+require_relative '../lib/typing_statistics'
+
+# create an instance to display the menu
+@symbolic = Menu.new
+
+# Display the menu if there in no arguments passed to the command-line
+@symbolic.display_menu if ARGV.empty?
+
+# Set the options for the OptionParser
+parser = OptionParser.new do |opts|
+  # Print banner for users
+  opts.banner = 'Welcome to Symbol-holic! To run the program type: symbol_holic [options]'
+  # If user passes in -h or --help then display the help menu
+  opts.on('-h', '--help', 'Display the help menu') do
+    puts opts
+    exit
+  end
+  # If user passes in -d or --display then display their statistics
+  opts.on('-d', '--display', 'Displays the users statistics to the terminal') do
+    @symbolic.display_statistics
+  end
+  # If user passes in -r or --run then start the standard typing game
+  opts.on('-r', '--run', 'Run the standard typing game') do
+    @symbolic.run_game
+  end
+  # If user passes in -t or --targeted then start the targeted typing game
+  opts.on('-t', '--targeted', 'Run the targeted typing game') do
+    @symbolic.targeted_game
+  end
+end
+
+# Execute the parser
+begin
+  parser.parse!
+rescue OptionParser::InvalidOption
+  puts 'That is an invalid option. Please type -h or --help to see a list of valid options.'
+end
