@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'symbol-holic'
-  s.version = '0.0.0'
+  s.version = '0.0.2'
   s.date = '2020-10-01'
   s.summary = 'Symbolic!'
   s.description = 'A simple symbol typing game'
@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
     'public/key_scores.json'
   ]
   s.require_paths = %w[lib public]
+  s.add_runtime_dependency 'byebug', '~> 11.1.3'
   s.add_runtime_dependency 'colorize', '~> 0.8.1'
   s.add_runtime_dependency 'json', '~> 2.3', '>= 2.3.1'
   s.add_runtime_dependency 'terminal-table', '~> 1.8'
