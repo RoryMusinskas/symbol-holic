@@ -20,7 +20,9 @@ class Menu
       { name: 'Exit', value: '5' }
     ]
     # TTY prompt with the menu choices, users can select one of these items
-    TTY::Prompt.new.select('Welcome to Symbol-holic!', menu_choices)
+    TTY::Prompt.new.select('
+█▀ █▄█ █▀▄▀█ █▄▄ █▀█ █░░ ▄▄ █░█ █▀█ █░░ █ █▀▀
+▄█ ░█░ █░▀░█ █▄█ █▄█ █▄▄ ░░ █▀█ █▄█ █▄▄ █ █▄▄', menu_choices)
   end
 
   # This is the loop which runs and displays the menu to the user
@@ -65,6 +67,7 @@ class Menu
     @scores = @typing_game.run_game
     # @scores eg {";"=>[1, 1, 51.413921326711545], ":"=>[1, 0, 79.55781654849564], "#"=>[2, 0, 164.6563074129133]}
     @typing_statistics.statistics(@scores)
+    @typing_statistics.write_statistics
   end
 
   # Method for running the targeted typing game
@@ -72,6 +75,7 @@ class Menu
     @typing_game = TypingGame.new
     @scores = @typing_game.targeted_game
     @typing_statistics.statistics(@scores)
+    @typing_statistics.write_statistics
   end
 
   # Menu option and TTY prompt for deleting all typing statistics
