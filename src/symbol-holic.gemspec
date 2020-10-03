@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
   s.name = 'symbol-holic'
-  s.version = '0.0.3'
+  s.version = '0.0.4'
   s.date = '2020-10-01'
-  s.summary = 'Symbolic!'
+  s.summary = 'Symbol-holic'
   s.description = 'A simple symbol typing game'
   s.authors = 'Rory Musinskas'
   s.files = Dir[
