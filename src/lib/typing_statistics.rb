@@ -2,7 +2,6 @@ require 'json'
 require 'terminal-table'
 require 'tty-pie'
 require 'colorize'
-require 'byebug'
 require_relative 'typing_game'
 require_relative 'statistics_helper'
 class TypingStatistics

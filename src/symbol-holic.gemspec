@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'terminal-table', '~> 1.8'
   s.add_runtime_dependency 'tty-pie', '~> 0.4.0'
   s.add_runtime_dependency 'tty-prompt', '~> 0.22.0'
-  s.add_runtime_dependency 'tty-reader', '~> 0.8.0'
   s.executables << 'symbol_holic'
   s.required_ruby_version = '>= 2.4'
 end
