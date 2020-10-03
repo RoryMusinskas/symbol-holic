@@ -1,6 +1,6 @@
-Gem::Specification.new do |s|
+﻿Gem::Specification.new do |s|
   s.name = 'symbol-holic'
-  s.version = '0.0.4'
+  s.version = '0.0.5'
   s.date = '2020-10-01'
   s.summary = 'Symbol-holic'
   s.description = 'A simple symbol typing game'
