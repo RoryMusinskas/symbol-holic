@@ -7,14 +7,13 @@
 
 This application will only work on Mac and Linux machines.
 
-The list of gem dependencies - which will installed with the gem are:
+The list of gem dependencies - which will be installed with the gem are:
   - 'byebug', '~> 11.1.3'
   - 'colorize', '~> 0.8.1'
   - 'json', '~> 2.3', '>= 2.3.1'
   - 'terminal-table', '~> 1.8'
   - 'tty-pie', '~> 0.4.0'
   - 'tty-prompt', '~> 0.22.0'
-  - 'tty-reader', '~> 0.8.0'
 
 ### Install instructions  
 1. Install ruby, I recommend using asdf. Here is the link and instructions [asdf](https://github.com/asdf-vm/asdf).
